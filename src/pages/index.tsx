@@ -1,11 +1,17 @@
 import { Container } from '../components/Container'
-import { DarkModeSwitch } from '../components/DarkModeSwitch'
+import { useSelector } from 'react-redux';
+//import { loggedActionType } from './../actions/actions_index';
+import { loggedReducerType } from './../reducers/logged';
 
 
-const Index = () => (
+const Index = () => {const logState= useSelector((state:loggedReducerType)=>state.logState)
+  
+    console.log(logState)
+  
+return (
   <Container height="100vh">
-    <DarkModeSwitch />
+    {logState}
   </Container>
 )
-
+}
 export default Index

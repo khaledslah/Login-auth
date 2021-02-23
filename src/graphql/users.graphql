@@ -1,0 +1,13 @@
+query GetUsers {
+  usersForHome {
+    id
+    username
+    password
+  }
+}
+mutation AddUsers($registerUsername: String!, $registerPassword: String!) {
+  register(username: $registerUsername, password: $registerPassword) {
+    username
+    password
+  }
+}

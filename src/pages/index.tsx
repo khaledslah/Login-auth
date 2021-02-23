@@ -2,12 +2,12 @@ import { Container } from '../components/Container'
 import { useSelector } from 'react-redux';
 //import { loggedActionType } from './../actions/actions_index';
 import { loggedReducerType } from './../reducers/logged';
-import { useGetTracksQuery } from '../generated/graphql-frontend';
+import {  useGetUsersQuery } from '../generated/graphql-frontend';
 
 
 const Index = () => {const logState= useSelector((state:loggedReducerType)=>state.logState)
   
-  const {loading,error,data} = useGetTracksQuery();
+  const {loading,error,data} = useGetUsersQuery();
   
   if (loading) {
     return 'Loading...'

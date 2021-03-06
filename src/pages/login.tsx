@@ -1,7 +1,7 @@
 import { Box, Button, FormControl, FormErrorMessage, FormLabel, Input } from '@chakra-ui/react';
 import { Form, Formik, FormikErrors } from 'formik';
 import React from 'react'
-import { useRegisterMutation } from '../generated/graphql-frontend';
+import {  useLoginMutation } from '../generated/graphql-frontend';
 import {useRouter} from 'next/router'
 interface FormValues {
     username: string;
@@ -12,7 +12,7 @@ interface registerProps {
 }
 
  const Register: React.FC<registerProps> = ({}) => {
-    const [addUsersMutation, ] = useRegisterMutation();
+    const [LoginMutation, ] = useLoginMutation();
     const router = useRouter();
     return (
         <Box mt={5}
@@ -32,30 +32,30 @@ interface registerProps {
             return errors;
         }}
         onSubmit={async (values,{setStatus}) => {
-            const  response =  await addUsersMutation({
+            const  response =  await LoginMutation({
                    variables: {
-                      registerUsername: values.username,
-                      registerPassword: values.password
+                      loginUsername: values.username,
+                      loginPassword: values.password
                    },
                  });
                  
                 
-                 if (response.data?.register?.field === "username") {
-                    setStatus ({username:response.data?.register?.message })
+                  if (response.data?.login?.field === "username") {
+                    setStatus ({username:response.data?.login?.message })
                     
                   }
-                  if (response.data?.register?.field === "password") {
-                    setStatus ({password:response.data?.register?.message! })
+                  if (response.data?.login?.field === "password") {
+                    setStatus ({password:response.data?.login?.message! })
                     
                   }
-                  if (response.data?.register == null) {
+                  if (response.data?.login == null) {
                       router.push("/");
                   }
             }}
         >
             {(props) =>(
                 <Form onSubmit={props.handleSubmit}>
-                    <FormControl isInvalid={(!!props.errors.username || props.status?.username) && props.touched.username }>
+                    <FormControl isInvalid={(!!props.errors.username || props.status?.username) && props.touched.username  }>
                         <FormLabel htmlFor="username">Username</FormLabel>
                     <Input
                     id= "inp1"
@@ -64,7 +64,7 @@ interface registerProps {
                     value={props.values.username}
                     name="username"
                     />
-                    <FormErrorMessage>{props.status?.username || props.errors.username}</FormErrorMessage>
+                    <FormErrorMessage>{ props.status?.username || props.errors.username}</FormErrorMessage>
                     
 
                     </FormControl>

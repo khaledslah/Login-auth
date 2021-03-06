@@ -1,12 +1,20 @@
-query GetUsers {
-  usersForHome {
-    id
-    username
-    password
+mutation Login($loginUsername: String!, $loginPassword: String!) {
+  login(username: $loginUsername, password: $loginPassword) {
+    field
+    message
   }
 }
-mutation AddUsers($registerUsername: String!, $registerPassword: String!) {
+mutation Register($registerUsername: String!, $registerPassword: String!) {
   register(username: $registerUsername, password: $registerPassword) {
+    field
+    message
+  }
+}
+
+
+query GetUsers {
+   usersForHome {
+    id
     username
     password
   }
